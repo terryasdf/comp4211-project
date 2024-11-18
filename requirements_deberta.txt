@@ -1,0 +1,5 @@
+datasets==2.16.1
+evaluate==0.4.3
+numpy==1.23.5
+pandas==1.5.2
+transformers==4.37.2
