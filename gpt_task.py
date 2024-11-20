@@ -123,13 +123,13 @@ for i in category1:
     second_row = test[test['relation'] == i].iloc[1]
     print('EventA:'+first_row['EventA']+'  EventB:'+first_row['EventB']+'  relation:'+first_row['relation'])
     print('EventA:'+second_row['EventA']+'  EventB:'+second_row['EventB']+'  relation:'+second_row['relation'])
-full_table=test
+
 
 prompt_list = {name: open(prompt, "r").read() for name, prompt in prompt_loc.items()}
 # zero-shot, one-shot, two-shot
 def run_predict(type : str):
-    gpt_client = GPT_QUERY(1, full_table)
-    gpt_client.predict(type, vote=1)
+    gpt_client = GPT_QUERY(4000, test)
+    gpt_client.predict(type, vote=3)
     return gpt_client.estimate()
 
 print(run_predict("zero-shot"))
