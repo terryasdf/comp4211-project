@@ -1,7 +1,7 @@
 # comp4211-project
 ## How to run in HKUST Linux
 ```
-python3.7 -m venv ./venv
+python3.7 -m venv ./venv --system-site-packages
 ```
 ```
 bash
@@ -12,7 +12,7 @@ source venv/bin/activate
 ```
 and you are now in the virtual environment.
 ```
-pip install ... (requirements_maybe) ...
+pip install -r ... (requirements_maybe) ...
 ```
 and 
 ```
