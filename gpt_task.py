@@ -17,9 +17,14 @@ with open(DATA_PATH, 'r', encoding='utf-8') as file:
     csv_table = list(reader)
 
 df = pd.DataFrame(csv_table)
-df['predict']=0
-df['EventB'] = df['EventB'].str.replace("[", "", regex=False).str.replace("]", "", regex=False).str.replace("'", "", regex=False).str.strip()
-df.head(2)
+train = df[:16000]
+train['predict']=0
+train['EventB'] = train['EventB'].str.replace("[", "", regex=False).str.replace("]", "", regex=False).str.replace("'", "", regex=False).str.strip()
+test = df[16000:20000]
+test['predict']=0
+test['EventB'] = test['EventB'].str.replace("[", "", regex=False).str.replace("]", "", regex=False).str.replace("'", "", regex=False).str.strip()
+test.head(2)
+
 #df = pd.DataFrame()
 pange = pd.DataFrame()
 
@@ -114,11 +119,11 @@ class GPT_QUERY:
 
 category1 = ["oEffect", "oReact", "oWant",  "xAttr","xEffect", "xIntent", "xNeed", "xReact", "xWant"]
 for i in category1:
-    first_row = df[df['relation'] == i].iloc[0]
-    second_row = df[df['relation'] == i].iloc[1]
+    first_row = test[test['relation'] == i].iloc[0]
+    second_row = test[test['relation'] == i].iloc[1]
     print('EventA:'+first_row['EventA']+'  EventB:'+first_row['EventB']+'  relation:'+first_row['relation'])
     print('EventA:'+second_row['EventA']+'  EventB:'+second_row['EventB']+'  relation:'+second_row['relation'])
-full_table=df
+full_table=test
 
 prompt_list = {name: open(prompt, "r").read() for name, prompt in prompt_loc.items()}
 # zero-shot, one-shot, two-shot
