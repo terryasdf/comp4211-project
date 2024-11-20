@@ -17,10 +17,10 @@ with open(DATA_PATH, 'r', encoding='utf-8') as file:
     csv_table = list(reader)
 
 df = pd.DataFrame(csv_table)
-train = df[:16000]
+train = df[:16000].copy()
 train['predict']=0
 train['EventB'] = train['EventB'].str.replace("[", "", regex=False).str.replace("]", "", regex=False).str.replace("'", "", regex=False).str.strip()
-test = df[16000:20000]
+test = df[16000:20000].copy()
 test['predict']=0
 test['EventB'] = test['EventB'].str.replace("[", "", regex=False).str.replace("]", "", regex=False).str.replace("'", "", regex=False).str.strip()
 test.head(2)
