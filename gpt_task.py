@@ -18,10 +18,10 @@ with open(DATA_PATH, 'r', encoding='utf-8') as file:
 
 df = pd.DataFrame(csv_table)
 train = df[:16000].copy()
-train['predict']=0
+train['predict']='0'
 train['EventB'] = train['EventB'].str.replace("[", "", regex=False).str.replace("]", "", regex=False).str.replace("'", "", regex=False).str.strip()
 test = df[16000:20000].copy()
-test['predict']=0
+test['predict']='0'
 test['EventB'] = test['EventB'].str.replace("[", "", regex=False).str.replace("]", "", regex=False).str.replace("'", "", regex=False).str.strip()
 test.head(2)
 
@@ -101,7 +101,7 @@ class GPT_QUERY:
                         # print(f"An error occurred at index {index_A}:", error)
                     bar.update(1)
         finally:
-            table.head(set_size)[['predict', 'relation', 'EventA', 'EventB']].to_csv(f"results/{prompt_type}_cot_{cot}.csv")
+            table.head(set_size)[['predict', 'relation',]].to_csv(f"results/{prompt_type}_cot_{cot}.csv")
             print(table.head(set_size)[['predict', 'relation']])
 
     def estimate(self, ptf=False):
