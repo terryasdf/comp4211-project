@@ -94,11 +94,11 @@ class GPT_QUERY:
                 for index_A, row_A in table.head(set_size).iterrows():
                     sentences = [row_A['EventA'], row_A['EventB']]
                     joined_sentence = " == ".join(sentences)
-                    try:
-                        table.at[index_A, 'predict'] = self.majority_vote([ \
-                            self.gpt(joined_sentence, prompt, processor, cot) for _ in range(vote)])
-                    except Exception as error:
-                        print(f"An error occurred at index {index_A}:", error)
+                    # try:
+                    table.at[index_A, 'predict'] = self.majority_vote([ \
+                        self.gpt(joined_sentence, prompt, processor, cot) for _ in range(vote)])
+                    # except Exception as error:
+                        # print(f"An error occurred at index {index_A}:", error)
                     bar.update(1)
         finally:
             table.head(set_size)[['predict', 'relation', 'EventA', 'EventB']].to_csv(f"results/{prompt_type}_cot_{cot}.csv")
