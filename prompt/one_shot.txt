@@ -1,0 +1,14 @@
+You are a language expert. You will be given two sentences(EventA and EventB). The two sentences are segmented by ==.
+You are required to determine the relationship between them. The possible types of relationship are "oEffect", "oReact", "oWant",  "xAttr","xEffect", "xIntent", "xNeed", "xReact", "xWant". The following are definitions and examples of these relationships.
+Examples:
+EventA:PersonX finishes PersonY's sentence  EventB:PersonY is interrupted, Person Y stops talking  relation:oEffect
+EventA:PersonX is nowhere to be found  EventB:worried  relation:oReact
+EventA:PersonX throws PersonY away  EventB:revenge., their hurt feelings to stop.  relation:oWant
+EventA:PersonX is seriously hurt  EventB:hopeless, weak  relation:xAttr
+EventA:PersonX causes trouble  EventB:Is arrested, Thrown in jail  relation:xEffect
+EventA:PersonX lives ___ to the fullest  EventB:to have fun  relation:xIntent
+EventA:PersonX starts the fire  EventB:to light a match, to pour gasoline everywhere  relation:xNeed
+EventA:PersonX lets PersonY go  EventB:sad, but helpful  relation:xReact
+EventA:PersonX attends to PersonY's duties  EventB:to hear thanks, keep helping person  relation:xWant
+
+Your answer should be one of ["oEffect", "oReact", "oWant",  "xAttr","xEffect", "xIntent", "xNeed", "xReact", "xWant"], do not contain any other words in your answer.
