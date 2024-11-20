@@ -127,9 +127,10 @@ for i in category1:
 
 prompt_list = {name: open(prompt, "r").read() for name, prompt in prompt_loc.items()}
 # zero-shot, one-shot, two-shot
-def run_predict(type : str):
+def run_predict(type: str, cot=False):
     gpt_client = GPT_QUERY(4000, test)
-    gpt_client.predict(type, vote=3)
+    gpt_client.predict(type, vote=3, cot=cot)
     return gpt_client.estimate()
 
-print(run_predict("zero-shot"))
+run_predict("zero-shot")
+# run_predict("zero-shot", True)
