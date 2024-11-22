@@ -41,10 +41,10 @@ client = AzureOpenAI(
     azure_endpoint="https://hkust.azure-api.net"
 )
 
-def simple_clean(sentence):
-    return re.sub(r'[^\w\s]', '', sentence)
+
 def default_clean(sentence):
     return sentence
+
 def categorical_clean(sentence):
     categories = ["oEffect", "oReact", "oWant",  "xAttr","xEffect", "xIntent", "xNeed", "xReact", "xWant"]
     regex = f"{'|'.join(categories)}"

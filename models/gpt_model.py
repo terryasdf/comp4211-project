@@ -4,8 +4,6 @@ import re
 from tqdm import tqdm
 from openai import AzureOpenAI
 
-def simple_clean(sentence):
-    return re.sub(r'[^\w\s]', '', sentence)
 def default_clean(sentence):
     return sentence
 def categorical_clean(sentence):
@@ -24,11 +22,12 @@ def majority_vote(votes):
 
 
 class GPTModel(BaseModel):
-    def __init__(self, prompt, result_path, model="gpt-35-turbo"):
+    def __init__(self, prompt, result_path, processor=default_clean, model="gpt-35-turbo"):
         self.client = AzureOpenAI(api_key=os.environ["AZURE_OPENAI_API_KEY"],
                                   api_version="2023-05-15",
                                   azure_endpoint="https://hkust.azure-api.net")
         self.model = model
+        self.processor = processor
         self.prompt = prompt
         self.result_path = result_path
 
@@ -60,17 +59,19 @@ class GPTModel(BaseModel):
     def evaluate(self, vote=1, cot=False):
         size = self.test_data.shape[0]
         table = self.test_data.head(size)
-        with tqdm(total=size) as bar:
-            for index_A, row_A in table.iterrows():
-                sentences = [row_A['EventA'], row_A['EventB']]
-                joined_sentence = " == ".join(sentences)
-                try:
-                    table.at[index_A, 'predict'] = majority_vote([ \
-                        self.gpt(joined_sentence, self.prompt, categorical_clean, cot) for _ in range(vote)])
-                except Exception as error:
-                    print(f"An error occurred at index {index_A}:", error)
-                    table.at[index_A, 'predict'] = "ERR"
-                bar.update(1)
-        table[['predict', 'relation',]].to_csv(self.result_path)
-        s = sum(table["relation"] == table["predict"])
-        return s / size
+        try:
+            with tqdm(total=size) as bar:
+                for index_A, row_A in table.iterrows():
+                    sentences = [row_A['EventA'], row_A['EventB']]
+                    joined_sentence = " == ".join(sentences)
+                    try:
+                        table.at[index_A, 'predict'] = majority_vote([ \
+                            self.gpt(joined_sentence, self.prompt, self.processor, cot) for _ in range(vote)])
+                    except Exception as error:
+                        print(f"An error occurred at index {index_A}:", error)
+                        table.at[index_A, 'predict'] = "ERR"
+                    bar.update(1)
+        finally:
+            table[['predict', 'relation',]].to_csv(self.result_path)
+            s = sum(table["relation"] == table["predict"])
+            return s / size
