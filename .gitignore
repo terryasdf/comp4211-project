@@ -1,4 +1,3 @@
 dataset
 venv
-results/*
-!results/results_saves_here
+.DS_Store
