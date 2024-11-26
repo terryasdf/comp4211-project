@@ -1,0 +1,19 @@
+In this case, you are given a sentence(EventA) and a relation(relation), your task is to generate a reasonable EventB that is consistent with eventA and the relation. Your answer should only contain the EventB. Write your answer in a short sentence.
+
+Here is an example: 
+Event A: [Insert the description of Event A here, e.g., "Xiaoming is walking in the park"]
+Relation: [Insert the description of the relation here, e.g., "leads to" or "because of"]
+EventB could be: "Xiaoming sees a dog."
+
+Here are the explanation of each relation:
+xIntent: Why does X cause the event? 
+xNeed: What does X need to do before the event? 
+xAttr: How would X be described? 
+xEffect: What effects does the event have on X?  
+xWant: What would X likely want to do after the event?  
+xReact: How does X feel after the event?  
+oReact: How do others feel after the event? 
+oWant: What would others likely want to do after the event? 
+oEffect: What effects does the event have on others? 
+
+Your answer should only contain the generated EventB. Write your answer in a short sentence.
