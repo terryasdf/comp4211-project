@@ -4,7 +4,6 @@ import numpy as np
 import torch
 from datasets import Dataset, DatasetDict
 from transformers import AutoTokenizer
-from transformers import AutoTokenizer
 from transformers import DataCollatorWithPadding
 from transformers import AutoModelForSequenceClassification, TrainingArguments, Trainer
 import os
@@ -67,8 +66,8 @@ class DebertaModel(BaseModel):
             else:
                 break
 
-        self.train_data = Dataset.from_dict({"label": train_label, "text": train_text})()
-        self.test_data = Dataset.from_dict({"label": test_label, "text": test_text})()
+        self.train_data = Dataset.from_dict({"label": train_label, "text": train_text})
+        self.test_data = Dataset.from_dict({"label": test_label, "text": test_text})
         self.dataset_dict["train"] = self.train_data
         self.dataset_dict["test"] = self.test_data
 

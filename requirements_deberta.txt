@@ -2,4 +2,8 @@ datasets
 evaluate
 numpy
 pandas
-transformers
+transformers[torch]
+torch
+tiktoken
+protobuf
+sentencepiece
