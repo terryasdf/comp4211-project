@@ -10,7 +10,7 @@ data = open_data(DATA_PATH)
 result_path = f"results/task_1_zero_shot_cot_{COT}.csv"
 prompt_path = 'prompt/zero_shot.txt'
 # result_path = "results/task_2.csv"
-# prompt_path = 'prompt/task2.txt'
+# prompt_path = 'prompt/task2_prompt.txt'
 with open(prompt_path, "r") as f:
     prompt = f.read()
 
